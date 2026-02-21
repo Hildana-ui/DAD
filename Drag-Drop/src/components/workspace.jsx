@@ -1,9 +1,10 @@
 import DraggableCard from "./draggableCard";
 
-function Workspace ({ cards, setSelectedId, updateCard }) {
+function Workspace ({ cards, setSelectedId, updateCard, selectedId, deleteCard, }) {
 
     return (
         <div 
+            omMouseDown={() => setSelectedId(null)}
             style={{
                 flex: "1",
                 position: "relative",
@@ -15,7 +16,9 @@ function Workspace ({ cards, setSelectedId, updateCard }) {
                     key={card.docId} 
                     card={card} 
                     updateCard={updateCard} 
+                    selectedId={selectedId}
                     setSelectedId={setSelectedId}
+                    deleteCard={deleteCard}
                 />
             ))}
         </div>

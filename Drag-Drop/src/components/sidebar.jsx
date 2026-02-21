@@ -1,4 +1,4 @@
-function Sidebar() {
+function Sidebar({ addCard }) {
     const cardTypes = [
         { id: "note", label: "Note" },
         { id: "todo", label: "Todo" },
@@ -6,8 +6,8 @@ function Sidebar() {
     ];
 
 
-    const handleDragStart = (e, type) => {
-        
+    const handleAdd = (type) => {
+        addCard(type, 200, 150);
     };
 
     return (
@@ -15,8 +15,8 @@ function Sidebar() {
             <h3>Elements</h3>
 
             {cardTypes.map((item) => (
-                <div key={item.id} 
-                style={{ width: "100px", height: "100px", background: "white", border: "1px solid black", marginBottom: "10px", cursor: "grab", borderRadius: "8px", textAlign: "center", fontWeight: "500", }}>
+                <div key={item.id} onClick={() => handleAdd(item.id)}
+                style={{ width: "100px", height: "100px", background: "white", border: "1px solid black", marginBottom: "10px", cursor: "pointer", borderRadius: "8px", textAlign: "center", fontWeight: "500", display: "flex", alighItems: "center", justifyContent: "center", }}>
                 {item.label}
                 </div>
             ))}

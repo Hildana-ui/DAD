@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function DraggableCard({ card, updateCard, setSelectedId }) {
+function DraggableCard({ card, updateCard, setSelectedId, selectedId, deleteCard, }) {
     const [dragging, setDragging] = useState(false);
 
     const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -106,7 +106,11 @@ function DraggableCard({ card, updateCard, setSelectedId }) {
                 width: card.width,
                 height: card.height,
                 background: "lightblue",
-                border: "1px solid black",
+                border:
+                    selectedId === card.docId
+                      ? "2px solid #4f46e5" 
+                      : "1px solid black",
+                zIndex: card.zIndex || 1,
                 cursor: "grab",
                 transform: `rotate(${card.rotation || 0}deg)`,
             }}

@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import Sidebar from "./components/sidebar";
 import Workspace from "./components/workspace";
 import { db } from "./firebase";
-import { collection, addDoc, updateDoc, doc,getDocs } from "firebase/firestore";
+import { collection, addDoc, updateDoc, doc, getDocs, deleteDoc } from "firebase/firestore";
 
 function App() {
     const [cards, setCards] = useState([]);
+    const [selectedId, setSelectedId] = useState(null);
 
     const cardsRef = collection(db, "cards");
 
@@ -30,6 +31,7 @@ function App() {
             rotation: 0,
             width: 120,
             height: 120,
+            zIndex: 1,
         };
 
         if (type === "note") {
@@ -54,12 +56,19 @@ function App() {
         );
     };
 
+    const deletCard = async (docId) => {
+        await deleteDoc(doc(db, "cards", docId));
+        setCards((prev) => prev.filter((c) => c.docId !== docId));
+    };
+
     return (
         <div style={{ display: "flex", height: "100vh" }}>
-            <Sidebar />
-            <Workspace cards={cards} addCard={addCard} updateCard={updateCard} />
+            <Sidebar  addCard={addCard}/>
+            <Workspace cards={cards} updateCard={updateCard} selectedId={selectedId} setSelectedId={setSelectedId} deletCard={deletCard} />
         </div>
     );
 }
 
 export default App
+
+
