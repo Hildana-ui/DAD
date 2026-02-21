@@ -1,6 +1,6 @@
 import DraggableCard from "./draggableCard";
 
-function Workspace ({ cards, setSelectedId, updateCard, selectedId, deleteCard, }) {
+function Workspace ({ cards, setSelectedId, updateCard, selectedId, deleteCard,addCard, }) {
 
     return (
         <div 
@@ -19,6 +19,7 @@ function Workspace ({ cards, setSelectedId, updateCard, selectedId, deleteCard, 
                     selectedId={selectedId}
                     setSelectedId={setSelectedId}
                     deleteCard={deleteCard}
+                    addCard={addCard}
                 />
             ))}
         </div>

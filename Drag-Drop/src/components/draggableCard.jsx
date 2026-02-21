@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function DraggableCard({ card, updateCard, setSelectedId, selectedId, deleteCard, }) {
+function DraggableCard({ card, updateCard, setSelectedId, selectedId, deleteCard, addCard, }) {
     const [dragging, setDragging] = useState(false);
 
     const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -96,6 +96,18 @@ function DraggableCard({ card, updateCard, setSelectedId, selectedId, deleteCard
         };
     }
 
+    const duplicate = () => {
+        const copy = {
+            ...card,
+            X: card.x + 30,
+            y: card.y + 30,
+        };
+
+        delete copy.docId;
+
+        addCard(copy);
+    };
+
     return (
         <div
             onMouseDown={handleDragStart}
@@ -138,6 +150,48 @@ function DraggableCard({ card, updateCard, setSelectedId, selectedId, deleteCard
                     cursor: "nwse-resize",
                 }}
             />
+
+            {selectedId === card.docId && (
+                <div
+                    style={{
+                        position: "absolute",
+                        top: -45,
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        display: "flex",
+                        gap: 6,
+                        background: "white",
+                        padding: "4px 8px",
+                        borderRadius: 8,
+                        boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                    }}
+                >
+                    <button onClick={() => deleteCard(card.docId)}>🗑</button>
+
+                    <button onClick={() => { addCard(card.id, card.x + 30, card.y + 30)}}>
+                        📄
+                    </button>
+
+                    <button onClick={() => 
+                        updateCard(card.docId, {
+                            zIndex: (card.zIndex || 1) + 1,
+                        })
+                    }>
+                        ⬆
+                    </button>
+
+                    <button 
+                        onClick={() =>
+                            updateCard(card.docId, {
+                                zIndex: 0,
+                            })
+                        }
+                    >
+                        ⬇
+                    </button>
+    
+                </div>
+            )}
         </div>
     );
 }

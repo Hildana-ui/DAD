@@ -64,7 +64,7 @@ function App() {
     return (
         <div style={{ display: "flex", height: "100vh" }}>
             <Sidebar  addCard={addCard}/>
-            <Workspace cards={cards} updateCard={updateCard} selectedId={selectedId} setSelectedId={setSelectedId} deletCard={deletCard} />
+            <Workspace cards={cards} updateCard={updateCard} selectedId={selectedId} setSelectedId={setSelectedId} deletCard={deletCard} addCard={addCard} />
         </div>
     );
 }
