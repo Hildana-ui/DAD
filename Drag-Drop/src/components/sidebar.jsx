@@ -7,7 +7,7 @@ function Sidebar() {
 
 
     const handleDragStart = (e, type) => {
-        e.dataTransfer.setData("cardId", type);
+        
     };
 
     return (
@@ -15,9 +15,7 @@ function Sidebar() {
             <h3>Elements</h3>
 
             {cardTypes.map((item) => (
-                <div key={item.id} draggable onDragStart={(e) => {
-                    handleDragStart(e, item.id)
-                }}
+                <div key={item.id} 
                 style={{ width: "100px", height: "100px", background: "white", border: "1px solid black", marginBottom: "10px", cursor: "grab", borderRadius: "8px", textAlign: "center", fontWeight: "500", }}>
                 {item.label}
                 </div>
